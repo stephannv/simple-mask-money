@@ -131,9 +131,11 @@ describe(
         it(
           'should allow focus change',
           () => {
-            cy.get('input').focus().should("be.focused");
-            cy.focused().tab()
-            cy.get('input').should("not.be.focused")
+            cy.get('input').focus()
+            cy.get('input').should('be.focused');
+            cy.type('123', { timeout: 100 });
+            cy.get('input').tab();
+            cy.get('input').should('not.be.focused');
           },
         );
       }
