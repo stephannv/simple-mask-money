@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import type { SimpleMaskMoneyConfiguration } from '../../../src/types';
+import 'cypress-plugin-tab'
 
 const getUrl = (configuration: Partial<SimpleMaskMoneyConfiguration>, initalValue?: string, attr?: Array<string>) => {
   const options = new Array<string>();
