@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import type { SimpleMaskMoneyConfiguration } from '../../../src/types';
+import 'cypress-real-events';
 
 const getUrl = (configuration: Partial<SimpleMaskMoneyConfiguration>, initalValue?: string, attr?: Array<string>) => {
   const options = new Array<string>();
@@ -113,6 +114,28 @@ describe(
             cy.get('input').type('{Enter}');
 
             cy.get('@submit').should('have.not.been.called');
+          },
+        );
+      }
+    );
+
+    describe(
+      'focus change',
+      () => {
+        beforeEach(
+          () => {
+            cy.visit(getUrl({ prefix: '$', suffix: 'CAD' }, '6.66'));
+          }
+        );
+
+        it(
+          'allows focus change on Tab key press',
+          () => {
+            cy.get('input').focus()
+            cy.get('input').should('be.focused');
+            cy.get('input').type('123', { timeout: 100 });
+            cy.realPress('Tab')
+            cy.get('input').should('not.be.focused');
           },
         );
       }
