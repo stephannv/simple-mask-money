@@ -133,7 +133,7 @@ describe(
           () => {
             cy.get('input').focus()
             cy.get('input').should('be.focused');
-            cy.type('123', { timeout: 100 });
+            cy.get('input').type('123', { timeout: 100 });
             cy.get('input').tab();
             cy.get('input').should('not.be.focused');
           },
